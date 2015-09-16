@@ -66,7 +66,7 @@ featuresMeanStd <- row(features) %>%
 			else 
 				FALSE },
 		USE.NAMES = FALSE) %>%
-	which()
+	which() + 1 	# SubjectId is first column
 
 #
 # 2 ) Extracts only the measurements on the mean and standard deviation 
@@ -98,6 +98,6 @@ data <- data %>%
 # Excluding subjectId and activity from summarization
 cols  <- seq(2, ncol(data) - 1)
 data2 <- data %>%
-	group_by(subjectId) %>%
+	group_by(subjectId, activity) %>%
 	summarize_each(funs(mean), cols)
 
